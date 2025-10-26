@@ -35,21 +35,11 @@ const Squares: React.FC<SquaresProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
-      // eslint-disable-next-line no-console
-      console.log('[Squares] canvas ref missing');
       return;
     }
     // Ensure canvas can receive pointer events
     canvas.style.pointerEvents = 'auto';
-    // Debug mount
-    // eslint-disable-next-line no-console
-    console.log('[Squares] mounted, canvas size', canvas.offsetWidth, canvas.offsetHeight);
     const ctx = canvas.getContext('2d');
-  // eslint-disable-next-line no-console
-  console.log('[Squares] 2D context', !!ctx);
-  // Log configured colors for troubleshooting
-  // eslint-disable-next-line no-console
-  console.log('[Squares] props colors', { borderColor, hoverFillColor });
 
     const resizeCanvas = () => {
       canvas.width = canvas.offsetWidth;
@@ -61,9 +51,7 @@ const Squares: React.FC<SquaresProps> = ({
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-  // Debug listeners
-  // eslint-disable-next-line no-console
-  console.log('[Squares] attaching listeners');
+  // listeners attached
 
     const drawGrid = () => {
       if (!ctx) return;
@@ -97,9 +85,6 @@ const Squares: React.FC<SquaresProps> = ({
             // Use animated alpha for smooth fade
             ctx.globalAlpha = Math.max(0, Math.min(1, hoverAlphaRef.current));
             const fill = (hoverFillColor as string) || '#222';
-            // Debug: log when drawing hovered cell
-            // eslint-disable-next-line no-console
-            console.log('[Squares] drawing hovered cell at', absGridX, absGridY, 'fill', fill, 'alpha', hoverAlphaRef.current);
             ctx.fillStyle = fill;
             ctx.fillRect(squareX, squareY, squareSize, squareSize);
             ctx.restore();
@@ -170,28 +155,20 @@ const Squares: React.FC<SquaresProps> = ({
       const hoveredSquareX = Math.floor((mouseX + gridOffset.current.x) / squareSize);
       const hoveredSquareY = Math.floor((mouseY + gridOffset.current.y) / squareSize);
 
-      // Debug: log mouse and computed hovered indices
-      // eslint-disable-next-line no-console
-      console.log('[Squares] mouse', Math.round(mouseX), Math.round(mouseY), '-> hovered indices', hoveredSquareX, hoveredSquareY, 'gridOffset', gridOffset.current);
+  // mouse and computed hovered indices
 
       if (
         !hoveredSquareRef.current ||
         hoveredSquareRef.current.x !== hoveredSquareX ||
         hoveredSquareRef.current.y !== hoveredSquareY
       ) {
-        hoveredSquareRef.current = { x: hoveredSquareX, y: hoveredSquareY };
-        // Debug: log hover change
-        // eslint-disable-next-line no-console
-        console.log('[Squares] hover changed to', hoveredSquareRef.current);
+  hoveredSquareRef.current = { x: hoveredSquareX, y: hoveredSquareY };
         // Immediately redraw when hover changes for responsive feedback
         drawGrid();
       }
     };
 
     const handleMouseLeave = () => {
-      // Debug: mouse left
-      // eslint-disable-next-line no-console
-      console.log('[Squares] mouse leave');
       hoveredSquareRef.current = null;
       // Immediately redraw when mouse leaves
       drawGrid();
@@ -202,10 +179,6 @@ const Squares: React.FC<SquaresProps> = ({
     // forwarding document-level mouse moves ensures hover detection still works.
     canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('mouseleave', handleMouseLeave);
-    canvas.addEventListener('mouseenter', () => {
-      // eslint-disable-next-line no-console
-      console.log('[Squares] mouseenter');
-    });
     // Also listen on document to catch pointer movement even when an overlay
     // intercepts events. We still compute positions relative to the canvas.
     document.addEventListener('mousemove', handleMouseMove);
@@ -233,7 +206,7 @@ const Squares: React.FC<SquaresProps> = ({
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mousemove', handleMouseMove);
+  document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('visibilitychange', onVisibilityChange);
     };
   }, [direction, speed, borderColor, hoverFillColor, squareSize]);
