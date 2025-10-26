@@ -6,12 +6,12 @@ export default function Home() {
   return (
     <div className="min-h-screen flex items-start justify-center relative">
       <Header />
-      <div className="absolute inset-0 flex items-center justify-center z-20">
+  <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
   <div className="w-full max-w-7xl px-8 flex items-center gap-12 h-full">
           <div className="flex items-center gap-8">
             {/* Left column: Orb + status */}
             <div className="flex flex-col items-center gap-6">
-              <div className="relative w-[450px] h-[450px]">
+              <div className="relative w-[450px] h-[450px] pointer-events-auto">
                 <Orb hue={0} hoverIntensity={0.5} rotateOnHover={true} />
 
                 {/* Inner Orb - positioned absolutely within outer orb container */}
@@ -35,7 +35,7 @@ export default function Home() {
             </div>
 
             {/* Right column: glass-style chat box (placeholder content styled per your example) */}
-            <aside className="glass-ui-enhanced self-end w-[760px] max-w-[60vw] h-[70vh] max-h-[80vh] rounded-xl backdrop-blur-md bg-white/5 border border-white/10 overflow-hidden">
+            <aside className="glass-ui-enhanced self-end w-[760px] max-w-[60vw] h-[70vh] max-h-[80vh] rounded-xl backdrop-blur-md bg-white/5 border border-white/10 overflow-hidden pointer-events-auto">
               {/* Message area (moved directly into the aside so there's a single chat box) */}
               <div className="flex-1 p-4 h-full flex flex-col">
                 <div className="space-y-4 mb-4 overflow-y-auto p-2 h-64">

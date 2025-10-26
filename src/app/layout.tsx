@@ -40,7 +40,7 @@ export default function RootLayout({
             squareSize={40}
             direction='diagonal' // up, down, left, right, diagonal
             borderColor='rgba(39,30,55)'
-            hoverFillColor='red'
+            hoverFillColor='rgba(50,40,70, 0.8)'
           />
         </div>
         <div className="relative z-10">
