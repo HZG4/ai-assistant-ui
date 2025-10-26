@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Squares from "../components/Squares";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,10 +25,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
-        {children}
+        <div className="absolute inset-0 z-0">
+          <Squares
+            speed={0.7}
+            squareSize={40}
+            direction='diagonal' // up, down, left, right, diagonal
+            borderColor='rgba(39,30,55)'
+            hoverFillColor='red'
+          />
+        </div>
+        <div className="relative z-10">
+          {children}
+        </div>
       </body>
     </html>
   );

@@ -1,8 +1,15 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+@keyframes pulse-glow {
+  0% {
+    filter: drop-shadow(0 0 60px rgba(59, 130, 246, 0.6)) drop-shadow(0 0 120px rgba(59, 130, 246, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 80px rgba(59, 130, 246, 0.8)) drop-shadow(0 0 160px rgba(59, 130, 246, 0.5));
+  }
 }
 
 @theme inline {
@@ -10,17 +17,233 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.13 0.028 261.692);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.028 261.692);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.028 261.692);
+  --primary: oklch(0.21 0.034 264.665);
+  --primary-foreground: oklch(0.985 0.002 247.839);
+  --secondary: oklch(0.967 0.003 264.542);
+  --secondary-foreground: oklch(0.21 0.034 264.665);
+  --muted: oklch(0.967 0.003 264.542);
+  --muted-foreground: oklch(0.551 0.027 264.364);
+  --accent: oklch(0.967 0.003 264.542);
+  --accent-foreground: oklch(0.21 0.034 264.665);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.928 0.006 264.531);
+  --input: oklch(0.928 0.006 264.531);
+  --ring: oklch(0.707 0.022 261.325);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0.002 247.839);
+  --sidebar-foreground: oklch(0.13 0.028 261.692);
+  --sidebar-primary: oklch(0.21 0.034 264.665);
+  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-accent: oklch(0.967 0.003 264.542);
+  --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
+  --sidebar-border: oklch(0.928 0.006 264.531);
+  --sidebar-ring: oklch(0.707 0.022 261.325);
+}
+
+.dark {
+  --background: oklch(0.13 0.028 261.692);
+  --foreground: oklch(0.985 0.002 247.839);
+  --card: oklch(0.21 0.034 264.665);
+  --card-foreground: oklch(0.985 0.002 247.839);
+  --popover: oklch(0.21 0.034 264.665);
+  --popover-foreground: oklch(0.985 0.002 247.839);
+  --primary: oklch(0.928 0.006 264.531);
+  --primary-foreground: oklch(0.21 0.034 264.665);
+  --secondary: oklch(0.278 0.033 256.848);
+  --secondary-foreground: oklch(0.985 0.002 247.839);
+  --muted: oklch(0.278 0.033 256.848);
+  --muted-foreground: oklch(0.707 0.022 261.325);
+  --accent: oklch(0.278 0.033 256.848);
+  --accent-foreground: oklch(0.985 0.002 247.839);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.21 0.034 264.665);
+  --sidebar-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-accent: oklch(0.278 0.033 256.848);
+  --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Lightweight orbital glow using a pseudo-element that only animates
+   transform and opacity (composite-only) to keep GPU work minimal. */
+.orb-glow {
+  position: relative;
+  isolation: isolate; /* keep the glow compositor-local */
+}
+.orb-glow::before {
+  content: "";
+  position: absolute;
+  inset: -12%; /* slightly larger than container for soft edge */
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(124,58,237,0.36) 0%, rgba(124,58,237,0.18) 30%, rgba(124,58,237,0.06) 55%, transparent 70%);
+  transform: scale(0.98);
+  opacity: 0.9;
+  will-change: transform, opacity;
+  animation: orb-glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes orb-glow-pulse {
+  0% {
+    transform: scale(0.98);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.98);
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-glow::before {
+    animation: none !important;
+    opacity: 0.9;
+  }
+}
+
+/* Orbitron font utility */
+.font-orbitron {
+  font-family: 'Orbitron', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Header border shine: GPU-friendly pseudo-element that animates transform/opacity only. */
+.header-shine {
+  position: relative;
+  overflow: hidden;
+}
+.header-shine::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -40%;
+  width: 40%;
+  height: 120%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.32) 50%, transparent 100%);
+  transform: skewX(-20deg) translateX(0);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: transform 650ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 250ms ease;
+}
+.header-shine:hover::after {
+  transform: skewX(-20deg) translateX(300%);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-shine::after {
+    transition: none !important;
+    opacity: 0.5;
+  }
+  .header-shine:hover::after {
+    transform: none !important;
+    opacity: 0.5 !important;
+  }
+}
+
+/* Blur-in animation for subtext under the orb: starts blurred and morphs into clear text.
+   NOTE: animating `filter: blur()` causes repaints; keep animation short and respect reduced-motion. */
+.blur-in {
+  filter: blur(6px);
+  opacity: 0;
+  transform: translateY(6px);
+  will-change: filter, opacity, transform;
+  animation: blur-in 1400ms cubic-bezier(0.22, 0.9, 0.29, 1) forwards;
+}
+
+@keyframes blur-in {
+  0% {
+    filter: blur(6px);
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  60% {
+    filter: blur(1.5px);
+    opacity: 0.85;
+    transform: translateY(2px);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-in {
+    animation: none !important;
+    filter: blur(0px) !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
